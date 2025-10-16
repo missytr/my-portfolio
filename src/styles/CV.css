@@ -1,0 +1,29 @@
+.cv-container {
+  text-align: center;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+iframe {
+  border: 2px solid #f5b800; /* viền vàng */
+  border-radius: 10px;
+  margin-top: 20px;
+  box-shadow: 0 4px 12px rgba(245, 184, 0, 0.3); /* shadow vàng nhẹ */
+}
+
+.download-btn {
+  display: inline-block;
+  margin-top: 20px;
+  background: #f5b800; /* màu vàng chính */
+  color: #000; /* chữ đen để nổi bật */
+  padding: 12px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s, color 0.3s;
+}
+
+.download-btn:hover {
+  background: #e0a800; /* vàng đậm khi hover */
+  color: #fff; /* chữ trắng khi hover */
+}
