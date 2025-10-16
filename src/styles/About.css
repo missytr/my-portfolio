@@ -1,0 +1,156 @@
+.about-container {
+  padding: 80px 10%;
+  color: #333;
+  font-family: "Poppins", sans-serif;
+}
+
+/* --- Phần giới thiệu --- */
+.intro-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 80px;
+}
+
+.intro-image img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 4px solid #ffd54f; /* vàng sáng */
+}
+
+.intro-text {
+  flex: 1;
+  margin-left: 40px;
+}
+
+.intro-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.intro-text h2 {
+  color: #ffb300; /* vàng đậm */
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.intro-text p {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 15px;
+}
+
+.intro-text blockquote {
+  font-style: italic;
+  color: #555;
+  border-left: 4px solid #ffca28;
+  padding-left: 12px;
+}
+
+/* --- Kỹ năng --- */
+.skills-section {
+  margin-bottom: 80px;
+}
+
+.skills-section h2 {
+  color: #222;
+  margin-bottom: 20px;
+  border-left: 6px solid #ffca28;
+  padding-left: 10px;
+}
+
+.skills-list .skill {
+  margin-bottom: 15px;
+}
+
+.skill span {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.progress {
+  width: 100%;
+  height: 10px;
+  background: #eee;
+  border-radius: 5px;
+}
+
+.bar {
+  height: 100%;
+  background-color: #ffc107; 
+  border-radius: 5px;
+  transition: width 0.6s ease;
+}
+
+/* --- Sở thích --- */
+.interests-section {
+  margin-bottom: 80px;
+}
+
+.interests-section h2 {
+  color: #222;
+  margin-bottom: 20px;
+  border-left: 6px solid #ffca28;
+  padding-left: 10px;
+}
+
+.interests-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.interests-section li {
+  font-size: 1.1rem;
+  margin: 8px 0;
+  padding-left: 8px;
+}
+
+/* --- Mục tiêu nghề nghiệp --- */
+.goals-section h2 {
+  color: #222;
+  margin-bottom: 20px;
+  border-left: 6px solid #ffca28;
+  padding-left: 10px;
+}
+
+.goals-section p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #444;
+  background: #fff8e1;
+  padding: 15px 20px;
+  border-left: 5px solid #ffeb3b;
+  border-radius: 10px;
+}
+
+/* --- Hiệu ứng khi hover --- */
+.skill:hover .bar {
+  background-color: #ffb300;
+}
+
+.interests-section li:hover {
+  color: #ffb300;
+  transition: 0.3s;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .intro-section {
+    flex-direction: column;
+    text-align: center;
+  }
+  .intro-text {
+    margin-left: 0;
+    margin-top: 30px;
+  }
+  .intro-image img {
+    width: 250px;
+    height: 250px;
+  }
+}

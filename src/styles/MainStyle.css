@@ -1,0 +1,120 @@
+/* ====== Cấu hình cơ bản ====== */
+body {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fffdf8;
+  color: #333;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+img {
+  user-select: none;
+  display: block;
+}
+
+/* ====== Hero Section ====== */
+.hero-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 5%;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+.hero-text {
+  max-width: 450px;
+}
+.hero-text h1 {
+  font-size: 38px;
+  font-weight: 800;
+  margin-bottom: 15px;
+  color: #222;
+  line-height: 1.3;
+}
+.highlight {
+  color: #f59e0b;
+}
+.hero-text p {
+  color: #555;
+  font-size: 15px;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+.btn-main {
+  background-color: #f59e0b;
+  color: white;
+  padding: 10px 22px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.btn-main:hover {
+  background-color: #d98b06;
+}
+.hero-image img {
+  width: 260px;
+  height: 360px;
+  border-radius: 50% 0 50% 50% / 60% 40% 60% 40%;
+  object-fit: cover;
+  box-shadow: 0 10px 25px rgba(245, 158, 11, 0.25);
+}
+
+/* ====== Projects Section ====== */
+.projects-section {
+  text-align: center;
+  padding: 60px 5% 100px;
+}
+.projects-section h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 40px;
+  border-bottom: 3px solid #f59e0b;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  justify-items: center;
+}
+.project-item {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 340px;
+}
+.project-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(245, 158, 11, 0.25);
+}
+.project-item img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+.project-item h3 {
+  margin: 15px 0;
+  font-size: 18px;
+  color: #111;
+  font-weight: 700;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  .hero-image img {
+    width: 220px;
+    height: 300px;
+  }
+}
