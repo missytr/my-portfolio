@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Three.js — Island Realistic Scene</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      #app {
+        width: 100%;
+        height: 100vh;
+        display: block;
+        overflow: hidden;
+      }
+      .ui {
+        position: fixed;
+        left: 10px;
+        top: 10px;
+        z-index: 10;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 10px;
+        border-radius: 8px;
+        font-family: system-ui, Segoe UI, Roboto, Arial;
+      }
+      .ui button {
+        margin-top: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <div class="ui">
+      <div><b>Island — Realistic demo</b></div>
+      <div style="margin-top: 8px">
+        Use mouse to orbit / zoom. Run from Live Server.
+      </div>
+      <button id="toggleDay">Toggle Day/Night</button>
+    </div>
+
+    <!-- Dùng ES Module chuẩn -->
+    <script type="module">
+      import * as THREE from "https://unpkg.com/three@0.164.1/build/three.module.js";
+      import { OrbitControls } from "https://unpkg.com/three@0.164.1/examples/jsm/controls/OrbitControls.js";
+
+      const container = document.getElementById("app");
+      const scene = new THREE.Scene();
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.shadowMap.enabled = true;
+      container.appendChild(renderer.domElement);
+
+      const camera = new THREE.PerspectiveCamera(
+        45,
+        container.clientWidth / container.clientHeight,
+        0.1,
+        2000
+      );
+      camera.position.set(8, 6, 10);
+
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.target.set(0, 1, 0);
+      controls.enableDamping = true;
+
+      // Ánh sáng
+      const hemi = new THREE.HemisphereLight(0xffffff, 0x444466, 0.6);
+      scene.add(hemi);
+
+      const sun = new THREE.DirectionalLight(0xffffff, 1.0);
+      sun.position.set(5, 10, 7);
+      sun.castShadow = true;
+      scene.add(sun);
+
+      // Nước
+      const waterGeo = new THREE.CircleGeometry(8, 64);
+      const waterMat = new THREE.MeshStandardMaterial({
+        color: 0x1e90ff,
+        metalness: 0.2,
+        roughness: 0.35,
+      });
+      const water = new THREE.Mesh(waterGeo, waterMat);
+      water.rotation.x = -Math.PI / 2;
+      water.receiveShadow = true;
+      scene.add(water);
+
+      // Đảo
+      const islandGeo = new THREE.CylinderGeometry(6.5, 7, 2.6, 64);
+      const islandMat = new THREE.MeshStandardMaterial({
+        color: 0xe6d4b8,
+        roughness: 0.9,
+      });
+      const island = new THREE.Mesh(islandGeo, islandMat);
+      island.position.y = -1.1;
+      scene.add(island);
+
+      const topGeo = new THREE.CircleGeometry(5.6, 64);
+      const topMat = new THREE.MeshStandardMaterial({ color: 0x2b8b3a });
+      const top = new THREE.Mesh(topGeo, topMat);
+      top.rotation.x = -Math.PI / 2;
+      top.position.y = 0.6;
+      scene.add(top);
+
+      // Nhà
+      const houseGeo = new THREE.BoxGeometry(1.8, 1.0, 1.6);
+      const houseMat = new THREE.MeshStandardMaterial({ color: 0xf2f0ec });
+      const house = new THREE.Mesh(houseGeo, houseMat);
+      house.position.set(-1.6, 0.6, 1.0);
+      scene.add(house);
+
+      const roofGeo = new THREE.ConeGeometry(1.05, 0.9, 4);
+      const roofMat = new THREE.MeshStandardMaterial({ color: 0xb03a2e });
+      const roof = new THREE.Mesh(roofGeo, roofMat);
+      roof.position.set(-1.6, 1.4, 1.0);
+      roof.rotation.y = Math.PI / 4;
+      scene.add(roof);
+
+      // Cây
+      const makeTree = () => {
+        const g = new THREE.Group();
+        const trunk = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.12, 0.12, 1.0, 8),
+          new THREE.MeshStandardMaterial({ color: 0x7b4a2b })
+        );
+        trunk.position.y = 0.5;
+        const leaves = new THREE.Mesh(
+          new THREE.SphereGeometry(0.8, 16, 16),
+          new THREE.MeshStandardMaterial({ color: 0x2f9d3a })
+        );
+        leaves.position.y = 1.3;
+        g.add(trunk);
+        g.add(leaves);
+        return g;
+      };
+
+      for (let i = 0; i < 10; i++) {
+        const t = makeTree();
+        const angle = Math.random() * Math.PI * 2;
+        const r = 2.5 + Math.random() * 2;
+        t.position.set(Math.cos(angle) * r, 0.6, Math.sin(angle) * r);
+        scene.add(t);
+      }
+
+      // Nút Day/Night
+      let day = true;
+      document
+        .getElementById("toggleDay")
+        .addEventListener("click", () => {
+          day = !day;
+          if (day) {
+            renderer.setClearColor(0x87ceeb);
+            sun.intensity = 1.0;
+            hemi.intensity = 0.6;
+          } else {
+            renderer.setClearColor(0x0b1020);
+            sun.intensity = 0.1;
+            hemi.intensity = 0.15;
+          }
+        });
+
+      window.addEventListener("resize", () => {
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      });
+
+      const clock = new THREE.Clock();
+      function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+        const t = clock.getElapsedTime();
+        water.material.roughness = 0.3 + Math.sin(t * 0.6) * 0.02;
+        renderer.render(scene, camera);
+      }
+      animate();
+    </script>
+  </body>
+</html>

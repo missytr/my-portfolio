@@ -6,7 +6,7 @@ function Blog() {
     {
       title: "Java Basics",
       desc: "Giới thiệu cú pháp, biến, kiểu dữ liệu, vòng lặp và các kiến thức nền tảng.",
-      img: "images/java.jpg",
+      img: "../img/java1.jpg",
       link: "./Blog/java1",
     },
     {

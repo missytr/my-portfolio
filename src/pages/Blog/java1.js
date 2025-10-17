@@ -10,7 +10,7 @@ function Java1() {
       </p>
 
       <img
-        src="/images/java.jpg"
+        src="/img/java1.jpg"
         alt="Java Basics"
         className="blog-image"
       />
